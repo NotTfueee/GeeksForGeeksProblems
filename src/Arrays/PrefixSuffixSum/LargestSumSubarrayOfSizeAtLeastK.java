@@ -8,9 +8,9 @@ public class LargestSumSubarrayOfSizeAtLeastK {
 
     public static void main(String[] args) {
 
-        long [] arr = {1, -2, 2, -3};
+        long [] arr = {2,3,1,-7,6,-5,-4,4,3,3,2,-9,-5,6,1,2,1,1};
 
-        System.out.println(maxSumWithK(arr , arr.length , 2));
+        System.out.println(maxSumWithK(arr , arr.length , 4));
     }
 
     public static long maxSumWithK(long[] a , long n , long k )
@@ -30,26 +30,25 @@ public class LargestSumSubarrayOfSizeAtLeastK {
             pfs[i] = sum;
         }
 
-        int start = 0;
+        int start = 0 ;
+        sum = 0;
         long max = Integer.MIN_VALUE;
-        sum = 0 ;
 
-        for(int i = 0 ; i < size ; ++i)
+        for(int i = 0 ; i < n ; ++i)
         {
             sum += a[i];
             if(i - start == k-1)
             {
+                max = Math.max(max , sum);
                 if(start > 0)
                 {
-                    max = Math.max(max , sum + pfs[start - 1]);
+                    max = Math.max(max , sum + pfs[start-1]);
                 }
-                else max = Math.max(max , sum);
 
                 sum -= a[start];
                 start ++;
             }
         }
-
         return max;
     }
 }
